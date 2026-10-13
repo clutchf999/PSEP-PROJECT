@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FoodExpress - Online Food Ordering System</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Quick Demo Banner for Project Evaluation -->
+  <aside class="demo-bar" aria-label="Quick Evaluation Persona Bar">
+    <div class="container demo-bar-content">
+      <div class="demo-bar-label">
+        <i class="fa-solid fa-graduation-cap"></i> <strong>PSEP Project Evaluation Bar:</strong> Switch Persona
+      </div>
+      <div class="demo-buttons">
+        <button class="btn btn-xs demo-btn" onclick="quickLogin('adithya@example.com', 'Customer')">
+          <i class="fa-solid fa-user"></i> Customer (Adithya)
+        </button>
+        <button class="btn btn-xs demo-btn" onclick="quickLogin('owner@bistro.com', 'Restaurant Owner')">
+          <i class="fa-solid fa-utensils"></i> Restaurant Owner (Marco)
+        </button>
+        <button class="btn btn-xs demo-btn" onclick="quickLogin('admin@foodapp.com', 'Admin')">
+          <i class="fa-solid fa-shield-halved"></i> Administrator
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="#" class="brand" onclick="navigate('home')">
+        <div class="brand-icon"><i class="fa-solid fa-burger"></i></div>
+        <div class="brand-text">
+          <span>Food<span class="highlight">Express</span></span>
+          <small class="brand-sub">Online Food Ordering System</small>
+        </div>
+      </a>
+
+      <nav class="nav-links">
+        <a href="#restaurants" class="nav-item active" id="nav-browse" onclick="navigate('home')">
+          <i class="fa-solid fa-compass"></i> Browse Restaurants
+        </a>
+        <a href="#orders" class="nav-item" id="nav-orders" onclick="navigate('orders')" style="display:none;">
+          <i class="fa-solid fa-clock-rotate-left"></i> My Orders
+        </a>
+        <a href="#owner" class="nav-item" id="nav-owner" onclick="navigate('owner')" style="display:none;">
+          <i class="fa-solid fa-store"></i> Restaurant Portal
+        </a>
+        <a href="#admin" class="nav-item" id="nav-admin" onclick="navigate('admin')" style="display:none;">
+          <i class="fa-solid fa-chart-pie"></i> Admin Dashboard
+        </a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="cart-btn" id="open-cart-btn" onclick="openCart()">
+          <i class="fa-solid fa-basket-shopping"></i>
+          <span class="cart-label">Cart</span>
+          <span class="badge" id="cart-count">0</span>
+        </button>
+
+        <div id="auth-buttons">
+          <button class="btn btn-outline" onclick="openAuthModal('login')">Login</button>
+          <button class="btn btn-primary" onclick="openAuthModal('register')">Sign Up</button>
+        </div>
+
+        <div id="user-profile-menu" style="display:none;" class="user-menu">
+          <div class="user-chip">
+            <div class="avatar" id="user-avatar">A</div>
+            <div class="user-info">
+              <span class="user-name" id="user-display-name">Adithya</span>
+              <span class="user-role-badge" id="user-display-role">Customer</span>
+            </div>
+          </div>
+          <button class="btn btn-xs btn-outline-danger" onclick="logout()" title="Logout">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN APP VIEWS -->
+  <main class="main-content">
+
+    <!-- 1. HOME / RESTAURANT BROWSING VIEW -->
+    <section id="view-home" class="view-section">
+      <!-- Hero Section -->
+      <div class="hero">
+        <div class="container hero-content">
+          <div class="hero-text">
+            <span class="pill-badge"><i class="fa-solid fa-bolt"></i> Fast 30-min Delivery</span>
+            <h1>Delicious Food Delivered To Your Doorstep</h1>
+            <p>Order from top-rated restaurants, track deliveries in real-time, and experience seamless dining.</p>
+            
+            <div class="search-box">
+              <i class="fa-solid fa-magnifying-glass search-icon"></i>
+              <input type="text" id="restaurant-search" placeholder="Search by restaurant name, cuisine, or dish..." oninput="handleSearch()">
+              <button class="btn btn-primary" onclick="applyFilters()">Search</button>
+            </div>
+          </div>
+          <div class="hero-image">
+            <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=800&q=80" alt="Delicious Food">
+          </div>
+        </div>
+      </div>
+
+      <!-- Categories Filter -->
+      <div class="container section-gap">
+        <div class="category-slider">
+          <button class="cat-pill active" onclick="filterCategory('All', this)">
+            <i class="fa-solid fa-border-all"></i> All
+          </button>
+          <button class="cat-pill" onclick="filterCategory('Biryani', this)">
+            <i class="fa-solid fa-bowl-rice"></i> Biryani
+          </button>
+          <button class="cat-pill" onclick="filterCategory('Burgers', this)">
+            <i class="fa-solid fa-burger"></i> Burgers
+          </button>
+          <button class="cat-pill" onclick="filterCategory('Pizza', this)">
+            <i class="fa-solid fa-pizza-slice"></i> Pizza
+          </button>
+          <button class="cat-pill" onclick="filterCategory('Chinese', this)">
+            <i class="fa-solid fa-bowl-food"></i> Chinese
+          </button>
+          <button class="cat-pill" onclick="filterCategory('Mains', this)">
+            <i class="fa-solid fa-utensils"></i> North Indian
+          </button>
+          <button class="cat-pill" onclick="filterCategory('Desserts', this)">
+            <i class="fa-solid fa-ice-cream"></i> Desserts
+          </button>
+          <button class="cat-pill" onclick="filterCategory('Beverages', this)">
+            <i class="fa-solid fa-mug-hot"></i> Beverages
+          </button>
+        </div>
+      </div>
+
+      <!-- Restaurants Grid -->
+      <div class="container section-gap" id="restaurants-section">
+        <div class="section-header">
+          <div>
+            <h2>Popular Restaurants Near You</h2>
+            <p class="text-muted">Handpicked selection with certified hygiene and highest ratings</p>
+          </div>
+          <div class="result-count" id="restaurant-count-text">Showing 4 restaurants</div>
+        </div>
+
+        <div class="restaurant-grid" id="restaurant-grid">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. RESTAURANT DETAIL & MENU VIEW -->
+    <section id="view-restaurant-detail" class="view-section" style="display:none;">
+      <div class="container">
+        <button class="btn btn-outline btn-sm mb-3" onclick="navigate('home')">
+          <i class="fa-solid fa-arrow-left"></i> Back to Restaurants
+        </button>
+
+        <div class="rest-banner-card" id="rest-detail-header">
+          <!-- Dynamically filled -->
+        </div>
+
+        <!-- Menu Tabs & Items -->
+        <div class="menu-container mt-4">
+          <div class="menu-header">
+            <h3>Restaurant Menu</h3>
+            <span class="badge badge-success" id="rest-menu-count">0 items available</span>
+          </div>
+
+          <div class="menu-grid" id="menu-items-grid">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+
+        <!-- Reviews Section -->
+        <div class="reviews-section mt-5" id="rest-reviews-container">
+          <h3>Customer Reviews & Ratings</h3>
+          <div class="reviews-list" id="restaurant-reviews-list">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. CUSTOMER ORDERS & TRACKING VIEW -->
+    <section id="view-orders" class="view-section" style="display:none;">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <h2>My Orders & Live Tracking</h2>
+            <p class="text-muted">Track order status from kitchen to your doorstep</p>
+          </div>
+        </div>
+
+        <div id="customer-orders-list" class="orders-list">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. RESTAURANT OWNER PORTAL -->
+    <section id="view-owner" class="view-section" style="display:none;">
+      <div class="container">
+        <div class="portal-header">
+          <div>
+            <h2>Restaurant Owner Dashboard</h2>
+            <p class="text-muted">Manage live incoming orders, menu items, and stock availability</p>
+          </div>
+          <div>
+            <button class="btn btn-primary" onclick="openAddMenuModal()">
+              <i class="fa-solid fa-plus"></i> Add New Menu Item
+            </button>
+          </div>
+        </div>
+
+        <!-- Owner Summary Stats -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon bg-blue"><i class="fa-solid fa-bell"></i></div>
+            <div class="stat-info">
+              <span class="stat-value" id="owner-active-orders">0</span>
+              <span class="stat-label">Active Orders</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon bg-green"><i class="fa-solid fa-indian-rupee-sign"></i></div>
+            <div class="stat-info">
+              <span class="stat-value" id="owner-total-revenue">₹0</span>
+              <span class="stat-label">Total Revenue</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon bg-purple"><i class="fa-solid fa-utensils"></i></div>
+            <div class="stat-info">
+              <span class="stat-value" id="owner-menu-count">0</span>
+              <span class="stat-label">Menu Items</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Owner Tabs -->
+        <div class="portal-tabs">
+          <button class="tab-btn active" onclick="switchOwnerTab('orders', this)">
+            <i class="fa-solid fa-receipt"></i> Incoming Orders
+          </button>
+          <button class="tab-btn" onclick="switchOwnerTab('menu', this)">
+            <i class="fa-solid fa-list-check"></i> Menu Management
+          </button>
+        </div>
+
+        <!-- Orders Management -->
+        <div id="owner-orders-tab" class="tab-content active">
+          <div class="orders-table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Order ID</th>
+                  <th>Customer</th>
+                  <th>Items Ordered</th>
+                  <th>Total Amount</th>
+                  <th>Order Time</th>
+                  <th>Current Status</th>
+                  <th>Update Action</th>
+                </tr>
+              </thead>
+              <tbody id="owner-orders-table-body">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Menu Management -->
+        <div id="owner-menu-tab" class="tab-content" style="display:none;">
+          <div class="menu-management-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Item</th>
+                  <th>Category</th>
+                  <th>Price</th>
+                  <th>Availability</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="owner-menu-table-body">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. ADMIN DASHBOARD & REPORTS (FR9) -->
+    <section id="view-admin" class="view-section" style="display:none;">
+      <div class="container">
+        <div class="portal-header">
+          <div>
+            <h2>Administrator Control Center</h2>
+            <p class="text-muted">System analytics, comprehensive sales reports, user audits</p>
+          </div>
+          <div class="btn-group">
+            <button class="btn btn-outline" onclick="downloadCSVReport('sales')">
+              <i class="fa-solid fa-file-csv"></i> Export Sales CSV
+            </button>
+            <button class="btn btn-outline" onclick="downloadCSVReport('orders')">
+              <i class="fa-solid fa-download"></i> Export Orders CSV
+            </button>
+          </div>
+        </div>
+
+        <!-- Admin Metrics -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon bg-green"><i class="fa-solid fa-indian-rupee-sign"></i></div>
+            <div class="stat-info">
+              <span class="stat-value" id="admin-total-revenue">₹0</span>
+              <span class="stat-label">Total System Revenue</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon bg-blue"><i class="fa-solid fa-cart-shopping"></i></div>
+            <div class="stat-info">
+              <span class="stat-value" id="admin-total-orders">0</span>
+              <span class="stat-label">Total Orders Placed</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon bg-orange"><i class="fa-solid fa-store"></i></div>
+            <div class="stat-info">
+              <span class="stat-value" id="admin-total-restaurants">0</span>
+              <span class="stat-label">Registered Restaurants</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon bg-purple"><i class="fa-solid fa-users"></i></div>
+            <div class="stat-info">
+              <span class="stat-value" id="admin-total-users">0</span>
+              <span class="stat-label">Registered Accounts</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Admin Visual Breakdown -->
+        <div class="admin-grid-2col mt-4">
+          <!-- Top Rated Restaurants Report -->
+          <div class="admin-card">
+            <div class="admin-card-header">
+              <h3><i class="fa-solid fa-award"></i> Top Rated Restaurants Report</h3>
+            </div>
+            <div class="admin-card-body">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Restaurant</th>
+                    <th>Rating</th>
+                    <th>Total Orders</th>
+                    <th>Address</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-top-restaurants-body">
+                  <!-- Dynamically populated -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Restaurant Sales & Revenue Breakdown -->
+          <div class="admin-card">
+            <div class="admin-card-header">
+              <h3><i class="fa-solid fa-chart-column"></i> Revenue by Restaurant</h3>
+            </div>
+            <div class="admin-card-body">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Restaurant</th>
+                    <th>Orders</th>
+                    <th>Gross Revenue</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-revenue-table-body">
+                  <!-- Dynamically populated -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- User Accounts Management -->
+        <div class="admin-card mt-4">
+          <div class="admin-card-header">
+            <h3><i class="fa-solid fa-users-gear"></i> System User Management</h3>
+          </div>
+          <div class="admin-card-body">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>User ID</th>
+                  <th>Full Name</th>
+                  <th>Email</th>
+                  <th>Phone</th>
+                  <th>Role</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="admin-users-table-body">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- CART & CHECKOUT DRAWER -->
+  <div class="drawer-overlay" id="cart-drawer-overlay" onclick="closeCart()"></div>
+  <aside class="cart-drawer" id="cart-drawer">
+    <div class="cart-header">
+      <h3><i class="fa-solid fa-basket-shopping"></i> Your Cart</h3>
+      <button class="close-btn" onclick="closeCart()">&times;</button>
+    </div>
+
+    <div class="cart-body" id="cart-items-container">
+      <!-- Items dynamically populated -->
+    </div>
+
+    <div class="cart-footer" id="cart-footer">
+      <div class="bill-details">
+        <div class="bill-row">
+          <span>Subtotal</span>
+          <span id="cart-subtotal">₹0</span>
+        </div>
+        <div class="bill-row">
+          <span>Delivery Fee</span>
+          <span id="cart-delivery-fee">₹30</span>
+        </div>
+        <div class="bill-row">
+          <span>Taxes (5% GST)</span>
+          <span id="cart-tax">₹0</span>
+        </div>
+        <div class="bill-row total-row">
+          <strong>Grand Total</strong>
+          <strong id="cart-grand-total">₹0</strong>
+        </div>
+      </div>
+
+      <div class="delivery-address-group mt-3">
+        <label for="checkout-address"><i class="fa-solid fa-location-dot"></i> Delivery Address:</label>
+        <textarea id="checkout-address" rows="2" placeholder="Enter flat/house no, street, landmark...">Flat 402, Green Glen Layout, Indiranagar, Bengaluru - 560038</textarea>
+      </div>
+
+      <button class="btn btn-primary btn-block mt-3" onclick="proceedToPayment()">
+        Proceed to Pay & Place Order <i class="fa-solid fa-arrow-right"></i>
+      </button>
+    </div>
+  </aside>
+
+  <!-- PAYMENT GATEWAY MODAL (FR5) -->
+  <div class="modal-backdrop" id="payment-modal" style="display:none;">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-shield-halved text-success"></i> Secure Payment Gateway</h3>
+        <button class="close-btn" onclick="closePaymentModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="payment-amount-box">
+          <span>Amount to Pay</span>
+          <h2 id="pay-modal-amount">₹0</h2>
+        </div>
+
+        <div class="payment-tabs">
+          <button class="pay-tab active" onclick="switchPayTab('upi', this)">
+            <i class="fa-solid fa-qrcode"></i> UPI / QR
+          </button>
+          <button class="pay-tab" onclick="switchPayTab('card', this)">
+            <i class="fa-solid fa-credit-card"></i> Card
+          </button>
+          <button class="pay-tab" onclick="switchPayTab('netbanking', this)">
+            <i class="fa-solid fa-building-columns"></i> Net Banking
+          </button>
+        </div>
+
+        <!-- UPI Tab -->
+        <div id="pay-tab-upi" class="pay-content active">
+          <div class="qr-mock">
+            <i class="fa-solid fa-qrcode qr-icon"></i>
+            <p>Scan with Google Pay, PhonePe, or Paytm</p>
+          </div>
+          <div class="form-group mt-3">
+            <label>Or enter UPI ID</label>
+            <input type="text" id="upi-id-input" placeholder="e.g. adithya@okhdfcbank" value="adithya@okhdfcbank">
+          </div>
+        </div>
+
+        <!-- Card Tab -->
+        <div id="pay-tab-card" class="pay-content" style="display:none;">
+          <div class="form-group">
+            <label>Card Number</label>
+            <input type="text" placeholder="4111 2222 3333 4444" value="4532 •••• •••• 9821">
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Expiry Date</label>
+              <input type="text" placeholder="MM/YY" value="08/29">
+            </div>
+            <div class="form-group">
+              <label>CVV</label>
+              <input type="password" placeholder="123" value="789">
+            </div>
+          </div>
+        </div>
+
+        <!-- Net Banking Tab -->
+        <div id="pay-tab-netbanking" class="pay-content" style="display:none;">
+          <div class="form-group">
+            <label>Choose Bank</label>
+            <select class="form-control">
+              <option>HDFC Bank</option>
+              <option>State Bank of India</option>
+              <option>ICICI Bank</option>
+              <option>Axis Bank</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="closePaymentModal()">Cancel</button>
+        <button class="btn btn-primary" id="confirm-pay-btn" onclick="executePayment()">
+          <i class="fa-solid fa-lock"></i> Authorize & Pay
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ORDER TRACKING MODAL (FR6) -->
+  <div class="modal-backdrop" id="tracking-modal" style="display:none;">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-location-crosshairs text-primary"></i> Real-Time Order Tracking</h3>
+        <button class="close-btn" onclick="closeTrackingModal()">&times;</button>
+      </div>
+      <div class="modal-body" id="tracking-modal-content">
+        <!-- Dynamically rendered -->
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary btn-block" onclick="closeTrackingModal()">Close Tracker</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- RATING & REVIEW MODAL (FR7) -->
+  <div class="modal-backdrop" id="review-modal" style="display:none;">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-star text-warning"></i> Rate & Review Order</h3>
+        <button class="close-btn" onclick="closeReviewModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p class="text-muted">How was your dining experience? Help others make better choices.</p>
+        
+        <div class="star-rating-selector" id="star-selector">
+          <i class="fa-solid fa-star star active" onclick="setStarRating(1)"></i>
+          <i class="fa-solid fa-star star active" onclick="setStarRating(2)"></i>
+          <i class="fa-solid fa-star star active" onclick="setStarRating(3)"></i>
+          <i class="fa-solid fa-star star active" onclick="setStarRating(4)"></i>
+          <i class="fa-solid fa-star star active" onclick="setStarRating(5)"></i>
+          <span class="rating-number" id="rating-number-text">5.0 / 5</span>
+        </div>
+
+        <div class="form-group mt-3">
+          <label>Your Review Comments:</label>
+          <textarea id="review-comment-input" rows="3" placeholder="Tell us about the food quality, taste, delivery speed..."></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="closeReviewModal()">Cancel</button>
+        <button class="btn btn-primary" onclick="submitReview()">Submit Review</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- AUTH MODAL (LOGIN / REGISTER) (FR1) -->
+  <div class="modal-backdrop" id="auth-modal" style="display:none;">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="auth-modal-title">Welcome to FoodExpress</h3>
+        <button class="close-btn" onclick="closeAuthModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="auth-tabs mb-3">
+          <button class="auth-tab active" id="tab-login" onclick="toggleAuthTab('login')">Login</button>
+          <button class="auth-tab" id="tab-register" onclick="toggleAuthTab('register')">Sign Up</button>
+        </div>
+
+        <form id="auth-form" onsubmit="handleAuthSubmit(event)">
+          <div class="form-group" id="reg-name-group" style="display:none;">
+            <label>Full Name</label>
+            <input type="text" id="auth-name" placeholder="John Doe">
+          </div>
+
+          <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" id="auth-email" placeholder="name@example.com" required>
+          </div>
+
+          <div class="form-group" id="reg-phone-group" style="display:none;">
+            <label>Phone Number</label>
+            <input type="tel" id="auth-phone" placeholder="9876543210">
+          </div>
+
+          <div class="form-group">
+            <label>Password</label>
+            <input type="password" id="auth-password" placeholder="••••••••" required>
+          </div>
+
+          <div class="form-group" id="reg-role-group" style="display:none;">
+            <label>Select User Role</label>
+            <select id="auth-role" class="form-control">
+              <option value="Customer">Customer</option>
+              <option value="Restaurant Owner">Restaurant Owner</option>
+              <option value="Admin">Administrator</option>
+            </select>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block mt-3" id="auth-submit-btn">
+            Login
+          </button>
+        </form>
+
+        <div class="auth-demo-hint mt-3">
+          <small class="text-muted"><strong>Default Test Password:</strong> <code>password123</code></small>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADD / EDIT MENU ITEM MODAL (FR3) -->
+  <div class="modal-backdrop" id="menu-modal" style="display:none;">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="menu-modal-title">Add Menu Item</h3>
+        <button class="close-btn" onclick="closeMenuModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="menu-item-form" onsubmit="handleMenuFormSubmit(event)">
+          <input type="hidden" id="menu-item-id">
+          
+          <div class="form-group">
+            <label>Item Name</label>
+            <input type="text" id="menu-item-name" required placeholder="e.g. Butter Naan">
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Price (₹)</label>
+              <input type="number" id="menu-item-price" min="1" step="0.5" required placeholder="150">
+            </div>
+            <div class="form-group">
+              <label>Category</label>
+              <select id="menu-item-category" class="form-control" required>
+                <option value="Starters">Starters</option>
+                <option value="Mains">Mains</option>
+                <option value="Biryani">Biryani</option>
+                <option value="Burgers">Burgers</option>
+                <option value="Pizza">Pizza</option>
+                <option value="Chinese">Chinese</option>
+                <option value="Desserts">Desserts</option>
+                <option value="Beverages">Beverages</option>
+                <option value="Breads">Breads</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Description</label>
+            <textarea id="menu-item-desc" rows="2" placeholder="Brief mouth-watering description..."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label>Image URL (Optional)</label>
+            <input type="url" id="menu-item-image" placeholder="https://images.unsplash.com/...">
+          </div>
+
+          <div class="form-group-checkbox mt-2">
+            <label>
+              <input type="checkbox" id="menu-item-avail" checked> In Stock / Available
+            </label>
+          </div>
+
+          <div class="modal-footer mt-3">
+            <button type="button" class="btn btn-outline" onclick="closeMenuModal()">Cancel</button>
+            <button type="submit" class="btn btn-primary">Save Item</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATIONS CONTAINER -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Application Script -->
+  <script src="js/app.js"></script>
+</body>
+</html>

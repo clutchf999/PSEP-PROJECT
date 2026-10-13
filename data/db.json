@@ -1,0 +1,289 @@
+{
+  "users": [
+    {
+      "User_ID": 1,
+      "Name": "Adithya Kumaresan",
+      "Email": "adithya@example.com",
+      "Phone": "9876543210",
+      "Password": "$2a$10$0QVoEs9CSqbKKSds.TJBKeLI8L3q3IF9qCvIJRgLNoEW0VrKUkvnS",
+      "Role": "Customer",
+      "Created_At": "2026-10-01T10:00:00.000Z"
+    },
+    {
+      "User_ID": 2,
+      "Name": "Marco Chef (Owner)",
+      "Email": "owner@bistro.com",
+      "Phone": "9876501234",
+      "Password": "$2a$10$0QVoEs9CSqbKKSds.TJBKeLI8L3q3IF9qCvIJRgLNoEW0VrKUkvnS",
+      "Role": "Restaurant Owner",
+      "Created_At": "2026-10-01T10:00:00.000Z"
+    },
+    {
+      "User_ID": 3,
+      "Name": "System Admin",
+      "Email": "admin@foodapp.com",
+      "Phone": "9998887776",
+      "Password": "$2a$10$0QVoEs9CSqbKKSds.TJBKeLI8L3q3IF9qCvIJRgLNoEW0VrKUkvnS",
+      "Role": "Admin",
+      "Created_At": "2026-10-01T10:00:00.000Z"
+    }
+  ],
+  "restaurants": [
+    {
+      "Restaurant_ID": 1,
+      "Name": "Spice Symphony",
+      "Address": "42 MG Road, Indiranagar, Bengaluru",
+      "Owner_ID": 2,
+      "Rating": 4.8,
+      "Cuisine": "North Indian, Biryani",
+      "Image_URL": "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=600&q=80",
+      "Delivery_Time": "25-35 mins",
+      "Cost_For_Two": 450,
+      "Created_At": "2026-10-01T10:00:00.000Z"
+    },
+    {
+      "Restaurant_ID": 2,
+      "Name": "Urban Burger Club",
+      "Address": "15 High Street, Koramangala, Bengaluru",
+      "Owner_ID": 2,
+      "Rating": 4.6,
+      "Cuisine": "Burgers, Fast Food, Shakes",
+      "Image_URL": "https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=600&q=80",
+      "Delivery_Time": "20-30 mins",
+      "Cost_For_Two": 350,
+      "Created_At": "2026-10-02T10:00:00.000Z"
+    },
+    {
+      "Restaurant_ID": 3,
+      "Name": "Bella Italia Woodfire",
+      "Address": "88 Central Avenue, Whitefield, Bengaluru",
+      "Owner_ID": 2,
+      "Rating": 4.7,
+      "Cuisine": "Italian, Pizza, Pasta",
+      "Image_URL": "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=600&q=80",
+      "Delivery_Time": "30-40 mins",
+      "Cost_For_Two": 600,
+      "Created_At": "2026-10-03T10:00:00.000Z"
+    },
+    {
+      "Restaurant_ID": 4,
+      "Name": "Dragon Wok Express",
+      "Address": "23 Residency Road, Ashok Nagar, Bengaluru",
+      "Owner_ID": 2,
+      "Rating": 4.5,
+      "Cuisine": "Chinese, Asian, Dimsums",
+      "Image_URL": "https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?auto=format&fit=crop&w=600&q=80",
+      "Delivery_Time": "25-35 mins",
+      "Cost_For_Two": 400,
+      "Created_At": "2026-10-04T10:00:00.000Z"
+    }
+  ],
+  "menu_items": [
+    {
+      "Item_ID": 1,
+      "Restaurant_ID": 1,
+      "Name": "Hyderabadi Dum Biryani",
+      "Price": 280,
+      "Category": "Biryani",
+      "Availability": true,
+      "Description": "Fragrant basmati rice layered with spiced marinated paneer and saffron.",
+      "Image_URL": "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=400&q=80"
+    },
+    {
+      "Item_ID": 2,
+      "Restaurant_ID": 1,
+      "Name": "Paneer Butter Masala",
+      "Price": 220,
+      "Category": "Mains",
+      "Availability": true,
+      "Description": "Rich and creamy tomato gravy infused with fresh butter and cottage cheese.",
+      "Image_URL": "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?auto=format&fit=crop&w=400&q=80"
+    },
+    {
+      "Item_ID": 3,
+      "Restaurant_ID": 1,
+      "Name": "Garlic Butter Naan",
+      "Price": 50,
+      "Category": "Breads",
+      "Availability": true,
+      "Description": "Crisp, tandoor-baked Indian bread topped with minced garlic and butter.",
+      "Image_URL": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=400&q=80"
+    },
+    {
+      "Item_ID": 4,
+      "Restaurant_ID": 1,
+      "Name": "Gulab Jamun (2 Pcs)",
+      "Price": 80,
+      "Category": "Desserts",
+      "Availability": true,
+      "Description": "Golden khoya dumplings soaked in warm rose-infused sugar syrup.",
+      "Image_URL": "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=400&q=80"
+    },
+    {
+      "Item_ID": 5,
+      "Restaurant_ID": 2,
+      "Name": "Classic Double Cheeseburger",
+      "Price": 199,
+      "Category": "Burgers",
+      "Availability": true,
+      "Description": "Double grilled patty, melted cheddar, pickles, secret sauce on toasted brioche.",
+      "Image_URL": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=400&q=80"
+    },
+    {
+      "Item_ID": 6,
+      "Restaurant_ID": 2,
+      "Name": "Crispy Peri Peri Fries",
+      "Price": 99,
+      "Category": "Sides",
+      "Availability": true,
+      "Description": "Golden crunchy potato fries tossed in zesty peri-peri seasoning.",
+      "Image_URL": "https://images.unsplash.com/photo-1576107232684-1279f3908594?auto=format&fit=crop&w=400&q=80"
+    },
+    {
+      "Item_ID": 7,
+      "Restaurant_ID": 2,
+      "Name": "Belgian Chocolate Shake",
+      "Price": 140,
+      "Category": "Beverages",
+      "Availability": true,
+      "Description": "Thick, creamy blend of Belgian dark chocolate and rich ice cream.",
+      "Image_URL": "https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=400&q=80"
+    },
+    {
+      "Item_ID": 8,
+      "Restaurant_ID": 3,
+      "Name": "Margherita Woodfire Pizza",
+      "Price": 320,
+      "Category": "Pizza",
+      "Availability": true,
+      "Description": "San Marzano tomato base, fresh mozzarella bocconcini, and sweet basil leaves.",
+      "Image_URL": "https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?auto=format&fit=crop&w=400&q=80"
+    },
+    {
+      "Item_ID": 9,
+      "Restaurant_ID": 3,
+      "Name": "Creamy Alfredo Penne Pasta",
+      "Price": 280,
+      "Category": "Pasta",
+      "Availability": true,
+      "Description": "Penne tossed with sautéed mushrooms, garlic cream sauce, and parmesan.",
+      "Image_URL": "https://images.unsplash.com/photo-1621996346565-e3d5d6281691?auto=format&fit=crop&w=400&q=80"
+    },
+    {
+      "Item_ID": 10,
+      "Restaurant_ID": 3,
+      "Name": "Tiramisu Classico",
+      "Price": 180,
+      "Category": "Desserts",
+      "Availability": true,
+      "Description": "Authentic espresso-soaked ladyfingers with mascarpone cream and cocoa powder.",
+      "Image_URL": "https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?auto=format&fit=crop&w=400&q=80"
+    },
+    {
+      "Item_ID": 11,
+      "Restaurant_ID": 4,
+      "Name": "Chilli Garlic Hakka Noodles",
+      "Price": 180,
+      "Category": "Chinese",
+      "Availability": true,
+      "Description": "Wok-tossed noodles with shredded vegetables, red chillies, and fried garlic.",
+      "Image_URL": "https://images.unsplash.com/photo-1585032226651-759b368d7246?auto=format&fit=crop&w=400&q=80"
+    },
+    {
+      "Item_ID": 12,
+      "Restaurant_ID": 4,
+      "Name": "Crispy Veg Spring Rolls",
+      "Price": 160,
+      "Category": "Starters",
+      "Availability": true,
+      "Description": "Crisp pastry rolls filled with garden vegetables, served with sweet chilli sauce.",
+      "Image_URL": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=400&q=80"
+    }
+  ],
+  "orders": [
+    {
+      "Order_ID": 101,
+      "Customer_ID": 1,
+      "Restaurant_ID": 1,
+      "Order_Date": "2026-10-12T13:15:00.000Z",
+      "Status": "Delivered",
+      "Total_Amount": 550,
+      "Delivery_Address": "Flat 402, Green Glen Layout, Bellandur, Bengaluru - 560103",
+      "Items": [
+        {
+          "Item_ID": 1,
+          "Name": "Hyderabadi Dum Biryani",
+          "Quantity": 1,
+          "Price": 280
+        },
+        {
+          "Item_ID": 2,
+          "Name": "Paneer Butter Masala",
+          "Quantity": 1,
+          "Price": 220
+        },
+        {
+          "Item_ID": 3,
+          "Name": "Garlic Butter Naan",
+          "Quantity": 1,
+          "Price": 50
+        }
+      ]
+    },
+    {
+      "Order_ID": 102,
+      "Customer_ID": 1,
+      "Restaurant_ID": 2,
+      "Order_Date": "2026-10-13T12:30:00.000Z",
+      "Status": "Preparing",
+      "Total_Amount": 298,
+      "Delivery_Address": "Flat 402, Green Glen Layout, Bellandur, Bengaluru - 560103",
+      "Items": [
+        {
+          "Item_ID": 5,
+          "Name": "Classic Double Cheeseburger",
+          "Quantity": 1,
+          "Price": 199
+        },
+        {
+          "Item_ID": 6,
+          "Name": "Crispy Peri Peri Fries",
+          "Quantity": 1,
+          "Price": 99
+        }
+      ]
+    }
+  ],
+  "payments": [
+    {
+      "Payment_ID": 1,
+      "Order_ID": 101,
+      "Amount": 550,
+      "Payment_Method": "UPI",
+      "Payment_Status": "Successful",
+      "Transaction_ID": "TXN_UPI_98234710",
+      "Payment_Date": "2026-10-12T13:16:00.000Z"
+    },
+    {
+      "Payment_ID": 2,
+      "Order_ID": 102,
+      "Amount": 298,
+      "Payment_Method": "Card",
+      "Payment_Status": "Successful",
+      "Transaction_ID": "TXN_CARD_55489123",
+      "Payment_Date": "2026-10-13T12:31:00.000Z"
+    }
+  ],
+  "reviews": [
+    {
+      "Review_ID": 1,
+      "Order_ID": 101,
+      "Customer_ID": 1,
+      "Customer_Name": "Adithya Kumaresan",
+      "Restaurant_ID": 1,
+      "Rating": 5,
+      "Comment": "Outstanding authentic biryani! Packaging was neat and delivered piping hot.",
+      "Created_At": "2026-10-12T14:00:00.000Z"
+    }
+  ]
+}
