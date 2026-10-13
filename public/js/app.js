@@ -205,6 +205,36 @@ function toggleAuthTab(mode) {
   document.getElementById('reg-phone-group').style.display = isLogin ? 'none' : 'block';
   document.getElementById('reg-role-group').style.display = isLogin ? 'none' : 'block';
   document.getElementById('auth-submit-btn').textContent = isLogin ? 'Login to Account' : 'Register Account';
+
+  const quickFillBar = document.getElementById('quick-fill-bar');
+  if (quickFillBar) quickFillBar.style.display = isLogin ? 'block' : 'none';
+
+  if (isLogin) {
+    document.getElementById('auth-password').value = 'password123';
+    if (!document.getElementById('auth-email').value) {
+      document.getElementById('auth-email').value = 'adithya@example.com';
+    }
+  }
+}
+
+function fillLoginForm(email, password = 'password123') {
+  document.getElementById('auth-email').value = email;
+  document.getElementById('auth-password').value = password;
+  showToast(`Autofilled credentials for ${email}`, 'info');
+}
+
+function togglePasswordVisibility() {
+  const pwdInput = document.getElementById('auth-password');
+  const icon = document.getElementById('toggle-pwd-icon');
+  if (pwdInput.type === 'password') {
+    pwdInput.type = 'text';
+    icon.classList.remove('fa-eye');
+    icon.classList.add('fa-eye-slash');
+  } else {
+    pwdInput.type = 'password';
+    icon.classList.remove('fa-eye-slash');
+    icon.classList.add('fa-eye');
+  }
 }
 
 async function handleAuthSubmit(e) {

@@ -604,6 +604,24 @@
           <button class="auth-tab" id="tab-register" onclick="toggleAuthTab('register')">Sign Up</button>
         </div>
 
+        <!-- Quick Autofill Account Buttons -->
+        <div class="quick-fill-bar mb-3" id="quick-fill-bar" style="background: #f8fafc; padding: 10px 14px; border-radius: 8px; border: 1px solid var(--border);">
+          <small class="text-muted" style="display:block; font-weight:700; margin-bottom:6px;">
+            <i class="fa-solid fa-wand-magic-sparkles text-primary"></i> 1-Click Autofill Account:
+          </small>
+          <div style="display:flex; gap:6px; flex-wrap:wrap;">
+            <button type="button" class="btn btn-xs btn-outline" onclick="fillLoginForm('adithya@example.com', 'password123')">
+              👤 Customer
+            </button>
+            <button type="button" class="btn btn-xs btn-outline" onclick="fillLoginForm('owner@bistro.com', 'password123')">
+              👨‍🍳 Restaurant Owner
+            </button>
+            <button type="button" class="btn btn-xs btn-outline" onclick="fillLoginForm('admin@foodapp.com', 'password123')">
+              🛡️ Administrator
+            </button>
+          </div>
+        </div>
+
         <form id="auth-form" onsubmit="handleAuthSubmit(event)">
           <div class="form-group" id="reg-name-group" style="display:none;">
             <label>Full Name</label>
@@ -612,7 +630,7 @@
 
           <div class="form-group">
             <label>Email Address</label>
-            <input type="email" id="auth-email" placeholder="name@example.com" required>
+            <input type="email" id="auth-email" placeholder="name@example.com" value="adithya@example.com" required>
           </div>
 
           <div class="form-group" id="reg-phone-group" style="display:none;">
@@ -621,8 +639,16 @@
           </div>
 
           <div class="form-group">
-            <label>Password</label>
-            <input type="password" id="auth-password" placeholder="••••••••" required>
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <label>Password</label>
+              <small class="text-success" style="font-weight:600;"><i class="fa-solid fa-check"></i> Default filled: <code>password123</code></small>
+            </div>
+            <div style="position:relative;">
+              <input type="password" id="auth-password" placeholder="••••••••" value="password123" required style="padding-right: 40px;">
+              <button type="button" onclick="togglePasswordVisibility()" style="position:absolute; right:10px; top:50%; transform:translateY(-50%); background:none; border:none; color:var(--text-muted); cursor:pointer;">
+                <i class="fa-solid fa-eye" id="toggle-pwd-icon"></i>
+              </button>
+            </div>
           </div>
 
           <div class="form-group" id="reg-role-group" style="display:none;">
@@ -640,7 +666,7 @@
         </form>
 
         <div class="auth-demo-hint mt-3">
-          <small class="text-muted"><strong>Default Test Password:</strong> <code>password123</code></small>
+          <small class="text-muted"><strong>Pre-filled Password:</strong> <code>password123</code> (Ready to log in with 1 click!)</small>
         </div>
       </div>
     </div>
