@@ -235,7 +235,7 @@
       "Customer_ID": 1,
       "Restaurant_ID": 2,
       "Order_Date": "2026-10-13T12:30:00.000Z",
-      "Status": "Preparing",
+      "Status": "Delivered",
       "Total_Amount": 298,
       "Delivery_Address": "Flat 402, Green Glen Layout, Bellandur, Bengaluru - 560103",
       "Items": [
@@ -250,6 +250,23 @@
           "Name": "Crispy Peri Peri Fries",
           "Quantity": 1,
           "Price": 99
+        }
+      ]
+    },
+    {
+      "Order_ID": 103,
+      "Customer_ID": 1,
+      "Restaurant_ID": 1,
+      "Order_Date": "2026-10-13T12:20:44.671Z",
+      "Status": "Placed",
+      "Total_Amount": 324,
+      "Delivery_Address": "Flat 402, Green Glen Layout, Indiranagar, Bengaluru - 560038",
+      "Items": [
+        {
+          "Item_ID": 1,
+          "Name": "Hyderabadi Dum Biryani",
+          "Quantity": 1,
+          "Price": 280
         }
       ]
     }
@@ -272,6 +289,15 @@
       "Payment_Status": "Successful",
       "Transaction_ID": "TXN_CARD_55489123",
       "Payment_Date": "2026-10-13T12:31:00.000Z"
+    },
+    {
+      "Payment_ID": 3,
+      "Order_ID": 103,
+      "Amount": 324,
+      "Payment_Method": "UPI",
+      "Payment_Status": "Successful",
+      "Transaction_ID": "TXN_UPI_15208245",
+      "Payment_Date": "2026-10-13T12:20:44.686Z"
     }
   ],
   "reviews": [
